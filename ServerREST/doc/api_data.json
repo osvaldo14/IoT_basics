@@ -1,0 +1,334 @@
+[
+  {
+    "type": "get",
+    "url": "get_average_measure_room/:roomID/:number",
+    "title": "Request the average of the x(number) last measurements of the sensors in a specific room",
+    "name": "Average",
+    "group": "Sensor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "Room",
+            "description": "<p>Number of a specific room (&quot;A505&quot;).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "Number",
+            "description": "<p>Amount of data.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Float",
+            "optional": false,
+            "field": "battery",
+            "description": "<p>Battery measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Float",
+            "optional": false,
+            "field": "luminance",
+            "description": "<p>Luminance measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Float",
+            "optional": false,
+            "field": "humidity",
+            "description": "<p>Humidity measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Float",
+            "optional": false,
+            "field": "temperature",
+            "description": "<p>Temperature measure.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "HTTP/1.1 200 OK\n[\n {\n   \"battery\": 100.000,\n   \"luminance\": 28.6923,\n   \"humidity\": 23.3077,\n   \"temperature\": 22.88461523789626,\n }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./app.py",
+    "groupTitle": "Sensor"
+  },
+  {
+    "type": "get",
+    "url": "/get_measure_2dates/:controllerID/:sensorID/:date1/:date2/",
+    "title": "Get all the measures of a specific sensor collected between two dates",
+    "name": "GetMeasures",
+    "group": "Sensor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "controllerID",
+            "description": "<p>Raspberry number id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "sensorID",
+            "description": "<p>sensor number.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "date1",
+            "description": "<p>starting date, must be in iso 8061 format</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "date2",
+            "description": "<p>ending date, must be in iso 8061 format</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array[Tuple]",
+            "optional": false,
+            "field": "measures",
+            "description": "<p>Array containing tuples of measures between starting date and ending date. Each tuple contains the following fields : raspberry, room, battery, humidity, luminance, motion, temprature, motion, temperature, updateTime</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "raspberry",
+            "description": "<p>The controller ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "room",
+            "description": "<p>Room number.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "battery",
+            "description": "<p>Battery measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "humidity",
+            "description": "<p>Humidity measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "luminance",
+            "description": "<p>Luminance measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "motion",
+            "description": "<p>Motion measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Float",
+            "optional": false,
+            "field": "temperature",
+            "description": "<p>Temperature measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "updateTime",
+            "description": "<p>Last measure's timestamp .</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "HTTP/1.1 200 OK\n[\n {\n  \"id\": 255\n  \"sensors_id\": 3,\n  \"controllerID\": 2,\n  \"room\": \"A505\",\n  \"battery\": 100,\n  \"humidity\": 20,\n  \"motion\": 0,\n  \"luminance\": 0,\n  \"temperature\": 22.4,\n  \"updateTime\": 1544553907,\n },\n {\n  \"id\": 255\n  \"sensors_id\": 3,\n  \"controllerID\": 2,\n  \"room\": \"A505\",\n  \"battery\": 100,\n  \"humidity\": 20,\n  \"motion\": 0,\n  \"luminance\": 0,\n  \"temperature\": 22.4,\n  \"updateTime\": 1544551267,\n }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./app.py",
+    "groupTitle": "Sensor"
+  },
+  {
+    "type": "get",
+    "url": "get_last_measure_sensor/:controllerID/:sensorID",
+    "title": "Request the last measure of a specific sensor",
+    "name": "Last",
+    "group": "Sensor",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "controllerID",
+            "description": "<p>ID of a controller.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "sensorID",
+            "description": "<p>ID of a sensor.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "ID",
+            "description": "<p>ID of the measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "number",
+            "description": "<p>Lastname of the User.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "raspberry",
+            "description": "<p>The controller ID.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "room",
+            "description": "<p>Room number.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "battery",
+            "description": "<p>Battery measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "humidity",
+            "description": "<p>Humidity measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "luminance",
+            "description": "<p>Luminance measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "motion",
+            "description": "<p>Motion measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Float",
+            "optional": false,
+            "field": "temperature",
+            "description": "<p>Temperature measure.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "updateTime",
+            "description": "<p>Last measure's timestamp .</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response",
+          "content": "HTTP/1.1 200 OK\n[\n {\n   \"id\": 255\n   \"sensors_id\": 3,\n   \"controllerID\": 2,\n   \"room\": \"A505\",\n   \"battery\": 100,\n   \"humidity\": 20,\n   \"motion\": 0,\n   \"luminance\": 0,\n   \"temperature\": 22.4, \n   \"updateTime\": 1544553907, \n }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./app.py",
+    "groupTitle": "Sensor"
+  },
+  {
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "./doc/main.js",
+    "group": "_home_itopie_PycharmProjects_ServerREST_doc_main_js",
+    "groupTitle": "_home_itopie_PycharmProjects_ServerREST_doc_main_js",
+    "name": ""
+  }
+]

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ Title }}</title>
+</head>
+<script type=text/javascript src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+<body>
+    <span class="content"></span>
+    <script>
+        var last_data = "{{ data }}";
+        console.log(last_data);
+        var data = last_data.split(' ');
+        console.log(data);
+        var cpt = 0;
+        $(document).ready(function(){
+            html = "<h1> All measures beetween 2 dates </h1> <br>";
+
+            while (cpt != data.length){
+
+                html += "sensor_ID : "      + data[1+cpt] + "<br>";
+                html += "controller_ID : "  + data[2+cpt] + "<br>";
+                html += "room : "           + data[3+cpt] + "<br>";
+                html += "battery : "        + data[4+cpt] + "<br>";
+                html += "humidity : "       + data[5+cpt] + "<br>";
+                html += "motion : "         + data[7+cpt] + "<br>";
+                html += "luminance : "      + data[6+cpt] + "<br>";
+                html += "temperature : "    + data[8+cpt] + "<br>";
+                html += "updatetime : "     + data[9+cpt] + "<br>";
+
+                cpt += 10;
+            }
+
+            $('.content').html(html);
+
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ Title }}</title>
+</head>
+<script type=text/javascript src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+<body>
+    <span class="content"></span>
+    <script>
+        var last_data = "{{ data }}";
+        console.log(last_data);
+        //La maroufle du siècle
+        var data = last_data.split('&#39;');
+        //Celle-ci, c'est celle du millénaire
+        var tmp = data[6].split('),)] [(');
+        var tmp2 = tmp[1].split(',)]')
+        console.log(data);
+        $(document).ready(function(){
+            html = "<h1> Average measure </h1> <br>";
+
+            html += "<strong>" + "battery : " + "</strong>"        + data[1] + "<br>";
+            html += "<strong>" + "luminance : " + "</strong>"      + data[3] + "<br>";
+            html += "<strong>" + "humidity : " + "</strong>"       + data[5] + "<br>";
+            html += "<strong>" + "temperature : " + "</strong>"    + tmp2[0] + "<br>";
+;
+            $('.content').html(html);
+
+        });
+    </script>
+
+</body>
+</html>
